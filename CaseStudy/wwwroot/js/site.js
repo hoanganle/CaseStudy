@@ -17,10 +17,11 @@ $(function () {
  //populate the modal fields
 const CopyToModal = (id, data) => {
     $("#qty").val("0");
-    $("#ProductName").text(data.ProductName);
-    $("#CostPrice").text(data.CostPrice);
-    $("#Description").text(data.Description);
-   // $("#detailsGraphic").attr("src", "/images/" + data.ProductName);
+   // $("#ProductName").text(data.ProductName);
+    //$("#CostPrice").text(data.CostPrice);
+    $("#ption").text(data.Description);
+  //  $("#detailsGraphic").attr("src", "/images/" + data.ProductName);
     $("#selectedId").val(id);
+    console.log(data);
     
 }

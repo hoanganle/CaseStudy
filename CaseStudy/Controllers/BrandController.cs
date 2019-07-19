@@ -87,7 +87,7 @@ namespace CaseStudy.Controllers
             String retMsg = "";
             foreach (ProductViewModel item in menu)
             {
-                if (item.Id == vm.Id)
+                if (item.BrandId == vm.Id)
                 {
                     if (vm.Qty > 0) // update only selected item
                     {
@@ -107,7 +107,7 @@ namespace CaseStudy.Controllers
             }
             ViewBag.AddMessage = retMsg;
             HttpContext.Session.Set<Dictionary<int, Object>>("tray", tray);
-            vm.SetCategories(HttpContext.Session.Get<List<Brands>>("categories"));
+            vm.SetCategories(HttpContext.Session.Get<List<Brands>>("brands"));
             return View("Index", vm);
         }
     }

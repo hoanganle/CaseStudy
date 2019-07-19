@@ -10,7 +10,8 @@ namespace CaseStudy.Models
         public string BrandName { get; set; }
         public int Id { get; set; }
         public int BrandId { get; set; }
-        public int Qty { get; set; }
+        public int Qty { get; set; }
+
         public IEnumerable<Products> Items { get; set; }
         public IEnumerable<SelectListItem> GetCategories()
         {
