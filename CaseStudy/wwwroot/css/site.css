@@ -13,3 +13,6 @@
     text-align: left;
     padding-left: 2%;
 }
+.navbar-toggler float-right navbar-dark {
+    color: #69899f;
+}

@@ -10,7 +10,8 @@
                 <option selected style="display:none;">Select Category</option>
             </select>
         </form>
-        @if (Context.Session.Get<ProductViewModel[]>("menu") != null && Model.Id > 0)
+        <catalogue category="@Model.Id"></catalogue>
+        @*@if (Context.Session.Get<ProductViewModel[]>("menu") != null && Model.Id > 0)
         {
             ProductViewModel[] menu = Context.Session.Get<ProductViewModel[]>("menu");
             <h5>Items</h5>
@@ -23,7 +24,7 @@
                     var itemjson = JsonConvert.SerializeObject(item);
                     var btn = "catbtn" + item.Id;
                     <div id="item" class="col-sm-3 col-xs-12 text-center" style="border:solid;">
-                        <img class="mt-2" src="~/images/@(item.ProductName).png" width="150" height="150" /><br />                        
+                        <img class="mt-2" src="~/images/@(item.ProductName).png" width="150" height="150" /><br />
                         @if (item.Description.Length > 25)
                         {
                             <span class="m-0" style="font-size:large;font-weight:bold;">@item.Description.Substring(0, 25)...</span>
@@ -39,7 +40,7 @@
                     </div>
                 }
             </div>
-        }
+        }*@
     </div>
 </div>
 <div class="modal" id="details_popup">
@@ -69,10 +70,10 @@
 
                         <div class="modalrow mb-4">
                             <div class="columnL">Qty</div>
-                            <div class="columnR" id="qty">
+                            <div class="columnR" id="abc">
                                 <input asp-for="Qty" type="number" maxlength="3" size="3"
                                        style="width: 50px;" id="qty" />
-                                <input asp-for="Id" type="hidden" id="selectedId" />
+                                <input asp-for="BrandId" type="hidden" id="selectedId" />
                             </div>
                         </div>
                     </div>
@@ -80,6 +81,9 @@
                         <button type="submit" class="btn btn-outline-dark">
                             Add To package
                         </button>
+                        <button id="btnRemove" type="submit" class="btn btn-outline-danger">Remove Item</button>
+                        <a href="/Tray" class="btn btn-outline-success">View Tray</a>
+
                     </div>
                 </form>
             </div>

@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-title text-center mt-5">
+        <h3 class="font-weight-bold">Tray Contents</h3>
+        <img src="/images/tray.png" style="height:10%;width:10%;padding-bottom:5%;" />
+    </div>
+    <div class="text-center">
+        @{
+            Dictionary<int, object> tray = Context.Session.Get<Dictionary<int, Object>>("tray");
+            //string graphicName = "";
+            //decimal MSRP = 0.0M;
+            decimal Price = 0;
+            //int QtyOnHand = 0;
+            //int backOrder = 0;
+            
+        }
+        <table class="table table-striped">
+            <tr style="font-weight:bolder;">
+                <th class="text-center">Qty</th>
+                <th class="text-left">Description</th>
+            </tr>
+            @{
+                if (tray != null)
+                {
+                    foreach (var key in tray.Keys)
+                    {
+                        ProductViewModel item = JsonConvert.DeserializeObject
+                       <ProductViewModel>
+                       (Convert.ToString(tray[key]));
+                        if (item.Qty > 0)
+                        {
+                            Price += item.CostPrice * item.Qty;
+
+                            //calTot += item.CAL * item.Qty;
+                            //saltTot += item.SALT * item.Qty;
+                            //fatTot += item.FAT * item.Qty;
+                            //cholTot += item.CHOL * item.Qty;
+                            //proTot += item.PRO * item.Qty;
+                            <tr>
+                                <td class="text-center">@item.Qty</td>
+                                <td class="text-left">@item.Description</td>
+                            </tr>
+                        }
+                    }
+                }
+            }
+        </table>
+        <hr />
+        <table class="table table-striped">
+            <tr>
+                <th colspan="4" class="text-left" style="font-size:large;font-weight:bold;">
+                    RECEIPT
+                    Totals
+                </th>
+            </tr>
+            <tr>
+                <td class="text-right font-weight-bold">TOTAL</td>
+                <td class="text-left" id="CostPrice">@Price </td>
+                @*<td class="text-right font-weight-bold">Choles.</td>
+                <td class="text-left" id="chol">@cholTot</td>*@
+            </tr>
+            <tr>
+                @*<td class="text-right font-weight-bold">Fat</td>
+                <td class="text-left" id="fat">@fatTot</td>
+                <td class="text-right font-weight-bold">Fibre</td>
+                <td class="text-left" id="fibre">@fbrTot</td>*@
+            </tr>
+            <tr>
+                @*<td class="text-right font-weight-bold">Protein</td>
+                <td class="text-left" id="pro">@proTot</td>
+                <td class="text-right font-weight-bold">Salt</td>
+                <td class="text-left" id="salt">@saltTot</td>*@
+            </tr>
+        </table>
+        <div class="text-center mb-2">
+            <form asp-controller="Tray" asp-action="AddTray" method="post" role="form">
+                @if (Context.Session.Get(SessionVariables.User) != null)
+                {
+                    <button type="submit" class="btn btn-sm btn-primary" id="modalbtn">Add Tray</button>
+                }
+                &nbsp;<a href="/Tray/ClearTray" class="btn btn-sm btn-success">Clear Tray</a>
+            </form>
+        </div>
+    </div>
+</div>

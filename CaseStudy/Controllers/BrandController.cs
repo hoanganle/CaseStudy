@@ -87,7 +87,7 @@ namespace CaseStudy.Controllers
             String retMsg = "";
             foreach (ProductViewModel item in menu)
             {
-                if (item.BrandId == vm.Id)
+                if (item.Id == vm.BrandId)
                 {
                     if (vm.Qty > 0) // update only selected item
                     {
@@ -101,7 +101,7 @@ namespace CaseStudy.Controllers
                         tray.Remove(item.Id);
                         retMsg = "item(s) Removed!";
                     }
-                    vm.BrandId = item.BrandId;
+                    vm.Id = item.BrandId;
                     break;
                 }
             }
